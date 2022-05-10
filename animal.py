@@ -20,3 +20,4 @@ if __name__ == '__main__':
     duck.fly()
     print("CAT!")
     print('CAT2!')
+    print('DOG2!')
