@@ -12,4 +12,4 @@ if __name__ == '__main__':
     print("!!!!")
     print("TEST!")
     print("THREE!")
-    print("OUO")
+    print("3")
