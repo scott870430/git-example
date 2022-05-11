@@ -9,4 +9,6 @@ if __name__ == '__main__':
     black = Cat('little_cat')
     black.call()
     print("cat!")
-    print("!!!!")
+    print("????")
+    print("????")
+    print("TEST!")
