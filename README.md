@@ -318,14 +318,86 @@ $ git cherry-pick fd23e1c 6a498ec f4f4442
 ```
 $ git cherry-pick 6a498ec --no-commit
 ```
+## GitHub
+
+* 先在github上新增新的repository
+* 接著在本地新增節點，用origin代稱GitHub服務器位置
+```
+$ git remote add origin git@github.com:kaochenlong/practice-git.git
+$ git push -u origin master
+```
+* 把master這個分支推向origin這個位置
+* 若master不存在就建立一個叫做master的同名分支
+* 如果存在的話就移動到server上，並指向最新的進度
+* ```-u``` upstream，上游，其實就是另一個分支的名字，在git中，每個分支可以設定一個上游，但每個分支最多只能設定一個upstream，他會指向並追蹤某個分支
+* 使用了```-u```，下次就可以直接```git push```，而不用每次都```git push origin master```
+
 
 ```
+$ git push origin master
+$ git push origin master:master # 與上面相同，把本地的master分支推上server的master更新進度
+$ git push origin master:cat # 推上server上的進度，建立或更新一個叫做```cat```的分支
 ```
-
+## Pull
 
 ```
+$ git fetch # 把server上的進度拉下來
+$ git merge origin/master # 拉下來的進度為origin/master，可以把它看成本地master分出去的分支，所以利用merge來進行合併
+$ git pull --rebase # 利用rebase來合併，避免產生新的commit
 ```
-
+> git pull = git fetch + git merge
+## Push失敗
+* 進度與server上不同
+* 先拉再推
+* 把server上的進度拉下來合併後再push
+```
+$ git pull --rebase
+```
+* 強制push
+* 但會覆蓋掉前面的進度，不推薦
+```
+git push -f # 或是--force
+```
+## Clone
+```
+$ git clone git@github.com:kaochenlong/dummy-git.git
+$ git clone git@github.com:kaochenlong/dummy-git.git hello_kitty # 改名成hello_kitty
+```
+## Pull Request (PR)
+* 先複製，分叉(fork)
+* 修改 + Push回自己帳號
+* 發request
+* 作者同意後merge
+## 跟上fork專案的進度
+* 砍掉重練，把fork過來的專案砍掉，再重新fork一次
+* 跟上游同步
+* 在fork來的專案上新增節點
+* 利用fetch抓取原作專案的內容，接著merge到自己這邊的專案上
+## 刪除遠端分支
+* 利用網頁，branch的地方有個垃圾桶來刪除
+* 或是利用push來刪除，使用空的內容來刪除遠端分支
+```
+$ git push origin :cat # 刪除cat分支
+```
+## git push -f
+* 在使用Rebase整理commit後，修改了已經發生的事實，所以正常來說是推不上去的，所以使用force push來解決這個問題，使用前請知會同專案的隊友
+* 可以將force用在自己使用的分支上，來整理commit，因為他也只會影響到這個分支，不會影響到他人
+* Github可以設置防止force某些分支
+* 救回資料，找到擁有舊資料的其他人，使用```git push -f```，覆蓋掉新的內容，把正確的推上去
+## 更新檔
+* 取得某次commit後到某個commit的更新檔
+```
+$ git format-patch fd7cd38..6e6ed76
+$ git format-patch -2 # 產生最新兩次commit的更新檔
+$ git format-patch -2 -o /tmp/patches # -o 指定更新檔位置
+```
+* 使用更新檔
+```
+$ git am /tmp/patches/*
+```
+## Git Flow
+```
+```
 ```
 ```
 
