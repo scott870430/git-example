@@ -16,5 +16,9 @@ class Duck(Bird):
         print("quack")
 
 if __name__ == '__main__':
-    duck = Bird('little_duck')
+    duck = Bird('little_cat')
     duck.fly()
+    print("CAT!")
+    print('CAT2!')
+    print('DOG2!')
+    print('CATˇ!')
