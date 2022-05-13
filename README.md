@@ -396,8 +396,55 @@ $ git format-patch -2 -o /tmp/patches # -o 指定更新檔位置
 $ git am /tmp/patches/*
 ```
 ## Git Flow
-```
-```
-```
-```
+* 主要分支有五種
+* master，穩定，隨時可上線的版本，分支來源只能從別的分支合併過來
+* develop，開發分支的基礎，所有feature的分支都是從這個分支分出去的
+* hotfix，當線上產品發生緊急問題的時候，會從 Master 分⽀開⼀個 Hotfix 分⽀出來進⾏修復，hotfix修復完之後合併回master分支，也會同時合併一分到develop分支
+* release，上線前的最後測試，從develop合併過來，測試完成後將結果合併到master跟develop
+* feature，新增功能時從develop開分支出來，完成後再合併回develop分支上
 
+## 還沒開分支就commit
+* 複製剛剛更改的檔案到別處
+* 重新clone一份專案
+* 在重新下載的專案中創建分支，並切換到分支
+* 放回剛剛複製的檔案
+
+* 還沒commit的話只要切換分支即可
+* 已經commit的話使用reset
+* 或是移動分支，把master跟原本位置上的分支交換
+```
+$ git branch cat master # 在master的地方創建cat這個分支
+$ git branch -f master e12d8ef # 在原本master該有的地方創建master分支
+```
+* 或是把分支換名字，利用```$ git branch -m cat tmp```
+* 如果沒有創建分支的話，補創一個，再把master移動回去即可
+
+## 找問題，二分法，bisect
+
+```
+$ git bisect start 起始點 結束點
+```
+* 接著git會跳到一半左右的地方，讓我們去檢查程式碼
+* 如果沒有問題輸入good，有問題則bad
+```
+$ git bisect good
+$ git bisect bad
+```
+* 如果做完了，或是不想做了就reset，就可以回到原本的分支
+```
+$ git bisect reset
+```
+## worktree
+
+* 複製一份code到別地方，並且建立一個新的branch
+* 可以在那個地方進行add跟commit，不過只是在不同目錄進行而已
+```
+$ git worktree add -b cat ../copycat # 在copycat目錄複製一份，並且創建一個cat分支，進到copycat目錄就代表在cat分支
+```
+* commit完以後，回到master branch也可以看到在copycat的commit，接著只要進行merge就可以把branch合併
+
+## ~ 跟 ^
+
+* 都是代表前一個位置
+* 但^2會去找第二個parent(例如分支merge會有兩個parent)
+* 但是~2不會，只會從第一個parent上，往回兩個位置
