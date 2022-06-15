@@ -266,7 +266,7 @@ $ git tag -d big_cats # 刪除標籤
 ```
 * tag跟分支很像，只是tag不會隨著commit移動
 
-## 工作到一半，林時切換到其他任務
+## 工作到一半，臨時切換到其他任務
 * 先commit，之後再reset
 ```
 $ git add --all
