@@ -323,7 +323,7 @@ $ git cherry-pick 6a498ec --no-commit
 * 先在github上新增新的repository
 * 接著在本地新增節點，用origin代稱GitHub服務器位置
 ```
-$ git remote add origin git@github.com:kaochenlong/practice-git.git
+$ git remote add origin git@github.com:xxx/practice-git.git
 $ git push -u origin master
 ```
 * 把master這個分支推向origin這個位置
@@ -360,8 +360,8 @@ git push -f # 或是--force
 ```
 ## Clone
 ```
-$ git clone git@github.com:kaochenlong/dummy-git.git
-$ git clone git@github.com:kaochenlong/dummy-git.git hello_kitty # 改名成hello_kitty
+$ git clone git@github.com:xxx/xxx-git.git
+$ git clone git@github.com:xxx/xxx-git.git hello_kitty # 改名成hello_kitty
 ```
 ## Pull Request (PR)
 * 先複製，分叉(fork)
